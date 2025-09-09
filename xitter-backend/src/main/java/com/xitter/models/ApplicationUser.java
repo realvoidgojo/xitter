@@ -21,9 +21,9 @@ import java.util.Set;
 public class ApplicationUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Changed AUTO → IDENTITY for Postgres compatibility
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -53,11 +53,16 @@ public class ApplicationUser {
     )
     private Set<Role> authorities;
 
-    public Long getId() {
+    public ApplicationUser() {
+        this.authorities = new HashSet<>();
+
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -123,11 +128,6 @@ public class ApplicationUser {
 
     public void setAuthorities(Set<Role> authorities) {
         this.authorities = authorities;
-    }
-
-    public ApplicationUser() {
-        this.authorities = new HashSet<>();
-
     }
 
     @Override
